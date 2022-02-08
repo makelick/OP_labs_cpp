@@ -52,7 +52,11 @@ void create_second_file(string filein_name, string fileout_name)
 		string line;
 		while (!filein.eof()) {
 			getline(filein, line);
-			vector<string> words = split(line);
+			if (!line.empty()) {
+				vector<string> words = split(line);
+				int number_of_words = count_same_words(words);
+				fileout << number_of_words << " " << line << "\n";
+			}
 		}
 	}
 
@@ -78,4 +82,18 @@ vector<string> split(string str)
 		}
 	}
 	return res;
+}
+
+int count_same_words(vector<string> words)
+{
+	int max_count = 0;
+
+	for (int i = 0; i < words.size(); i++)
+	{
+		if (count(words.begin(), words.end(), words[i]) > max_count) {
+			max_count = count(words.begin(), words.end(), words[i]);
+		}
+	}
+
+	return max_count;
 }

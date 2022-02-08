@@ -11,5 +11,8 @@ int main()
 
 	create_second_file(first_file_name, second_file_name);
 
+	cout << "Second file:\n";
+	output_file(second_file_name);
+
 	return 0;
 }

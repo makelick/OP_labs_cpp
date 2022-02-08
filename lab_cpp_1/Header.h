@@ -10,3 +10,4 @@ void input_file(string);
 void output_file(string);
 void create_second_file(string, string);
 vector<string> split(string);
+int count_same_words(vector<string>);
