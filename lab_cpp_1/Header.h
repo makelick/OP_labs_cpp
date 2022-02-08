@@ -6,3 +6,4 @@
 using namespace std;
 
 void input_file(string);
+void output_file(string);

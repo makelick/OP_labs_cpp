@@ -6,5 +6,8 @@ int main()
 	string second_file_name = "second file.txt";
 	input_file(first_file_name);
 
+	cout << "First file:\n";
+	output_file(first_file_name);
+
 	return 0;
 }
