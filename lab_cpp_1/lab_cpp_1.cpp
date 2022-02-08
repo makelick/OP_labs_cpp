@@ -9,5 +9,7 @@ int main()
 	cout << "First file:\n";
 	output_file(first_file_name);
 
+	create_second_file(first_file_name, second_file_name);
+
 	return 0;
 }

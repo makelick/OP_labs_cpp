@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /lab_cpp_1/first file.txt
+/lab_cpp_1/second file.txt
