@@ -10,6 +10,7 @@ void input_file(string name)
 	}
 	else {
 		string line;
+		cout << "Enter text (send empty line to finish):\n";
 		do {
 			getline(cin, line);
 			fileout << line << "\n";
