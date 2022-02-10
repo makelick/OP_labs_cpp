@@ -11,10 +11,11 @@ void input_file(string name)
 	else {
 		string line;
 		cout << "Enter text (send empty line to finish):\n";
-		do {
-			getline(cin, line);
+		getline(cin, line);
+		while (int(line[0]) != 24) {
 			fileout << line << "\n";
-		} while (!line.empty());
+			getline(cin, line);
+		}
 	}
 
 	fileout.close();
