@@ -12,7 +12,7 @@ void input_file(string name)
 		string line;
 		cout << "Enter text (send empty line to finish):\n";
 		getline(cin, line);
-		while (int(line[0]) != 24) {
+		while (!line.empty()) {
 			fileout << line << "\n";
 			getline(cin, line);
 		}
