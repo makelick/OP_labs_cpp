@@ -7,7 +7,6 @@
 using namespace std;
 
 struct employee;
-struct date;
 
 void input_file(string);
 void output_file(string);

@@ -1,23 +1,24 @@
 #include "Header.h"
 
-struct date {
-	int day;
-	int month;
-	int year;
-
-	void save(string line) {
-		vector<string> dmy = split(line, '.');
-		day = stoi(dmy[0]);
-		month = stoi(dmy[1]);
-		year = stoi(dmy[2]);
-	}
-
-	string get_format() {
-		return to_string(day) + '.' + to_string(month) + '.' + to_string(year);
-	}
-};
-
 struct employee {
+
+	struct date {
+		int day;
+		int month;
+		int year;
+
+		void save(string line) {
+			vector<string> dmy = split(line, '.');
+			day = stoi(dmy[0]);
+			month = stoi(dmy[1]);
+			year = stoi(dmy[2]);
+		}
+
+		string get_format() {
+			return to_string(day) + '.' + to_string(month) + '.' + to_string(year);
+		}
+	};
+
 	char surname[50];
 	date birthday;
 	date start_career;
@@ -45,7 +46,7 @@ void input_file(string file_path)
 		getline(cin, line);
 		while (!line.empty()) {
 			vector<string> words = split(line, ' ');
-			strcpy(person.surname, words[0].c_str());
+			strcpy_s(person.surname, words[0].c_str());
 			person.birthday.save(words[1]);
 			person.start_career.save(words[2]);
 			fileout.write((char*)&person, sizeof(employee));
