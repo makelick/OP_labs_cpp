@@ -7,15 +7,28 @@ struct employee {
 		int month;
 		int year;
 
-		void save(string line) {
+		bool save(string line) {
 			vector<string> dmy = split(line, '.');
 			day = stoi(dmy[0]);
 			month = stoi(dmy[1]);
 			year = stoi(dmy[2]);
+			if (day > 31 || month > 12) {
+				cout << "Entered invalid date" << endl;
+				return 0;
+			}
+			return 1;
 		}
 
 		string get_format() {
-			return to_string(day) + '.' + to_string(month) + '.' + to_string(year);
+			string str_day = to_string(day);
+			string str_month = to_string(month);
+			if (day < 10) {
+				str_day = '0' + to_string(day);
+			}
+			if (month < 10) {
+				str_month = '0' + to_string(month);
+			}
+			return str_day + '.' + str_month + '.' + to_string(year);
 		}
 	};
 
@@ -46,10 +59,15 @@ void input_file(string file_path)
 		getline(cin, line);
 		while (!line.empty()) {
 			vector<string> words = split(line, ' ');
-			strcpy_s(person.surname, words[0].c_str());
-			person.birthday.save(words[1]);
-			person.start_career.save(words[2]);
-			fileout.write((char*)&person, sizeof(employee));
+			if (words.size() < 3) {
+				cout << "Invalid input" << endl;
+			}
+			else {
+				strcpy_s(person.surname, words[0].c_str());
+				if (person.birthday.save(words[1]) && (person.start_career.save(words[2]))) {
+					fileout.write((char*)&person, sizeof(employee));
+				}
+			}
 			getline(cin, line);
 		}
 	}
