@@ -113,7 +113,6 @@ void output_file(string file_path)
 
 void birthday_in_this_month(string file_path)
 {
-	date sys_date = get_system_date();
 	ifstream filein;
 	filein.open(file_path);
 
@@ -122,16 +121,57 @@ void birthday_in_this_month(string file_path)
 	}
 	else {
 		employee person;
+		date sys_date = get_system_date();
 		while (filein.read((char*)&person, sizeof(employee)))
 		{
-			int career_years = sys_date.year - person.start_career.year;
-			if (person.start_career.month < sys_date.month || (person.start_career.month == sys_date.month && person.start_career.day > sys_date.day))
-				career_years -= 1;
-			if (person.birthday.month == sys_date.month && career_years >= 5)
+			int work_expirience = get_years_between_dates(person.start_career, sys_date);
+			if (person.birthday.month == sys_date.month && work_expirience >= 5)
+			{
 				person.print();
+			}
+
 		}
 	}
 	filein.close();
+}
+
+void create_second_file(string filein_name, string fileout_name)
+{
+	ifstream filein;
+	ofstream fileout;
+	filein.open(filein_name);
+	fileout.open(fileout_name);
+
+	if (!filein.is_open() || !fileout.is_open()) {
+		cout << "ERROR: Could not open";
+	}
+	else {
+		employee person;
+		date sys_date = get_system_date();
+		while (filein.read((char*)&person, sizeof(employee)))
+		{
+			int start_career_age = get_years_between_dates(person.birthday, person.start_career);
+			int work_expirience = get_years_between_dates(person.start_career, sys_date);
+			if (start_career_age <= 25 && work_expirience >= 10)
+			{
+				fileout.write((char*)&person, sizeof(employee));
+			}
+		}
+	}
+
+	filein.close();
+	fileout.close();
+}
+
+template <typename T1, typename T2>
+int get_years_between_dates(T1 start_date, T2 end_date)
+{
+	int years = end_date.year - start_date.year;
+	if (start_date.month > end_date.month || (start_date.month == end_date.month && start_date.day > end_date.day))
+	{
+		years -= 1;
+	}
+	return years;
 }
 
 date get_system_date()
