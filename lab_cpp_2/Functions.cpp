@@ -1,5 +1,23 @@
 #include "Header.h"
 
+struct date {
+	int day;
+	int month;
+	int year;
+
+	string get_format() {
+		string str_day = to_string(day);
+		string str_month = to_string(month);
+		if (day < 10) {
+			str_day = '0' + to_string(day);
+		}
+		if (month < 10) {
+			str_month = '0' + to_string(month);
+		}
+		return str_day + '.' + str_month + '.' + to_string(year);
+	}
+};
+
 struct employee {
 
 	struct date {
@@ -37,8 +55,8 @@ struct employee {
 	date start_career;
 
 	void print() {
-		cout << "Surname: " << surname << endl;
-		cout << "Birthday: " << birthday.get_format() << endl;
+		cout << "Surname: " << surname << '\t';
+		cout << "Birthday: " << birthday.get_format() << '\t';
 		cout << "Start career: " << start_career.get_format() << endl;
 	}
 };
@@ -91,6 +109,42 @@ void output_file(string file_path)
 		}
 	}
 	filein.close();
+}
+
+void birthday_in_this_month(string file_path)
+{
+	date sys_date = get_system_date();
+	ifstream filein;
+	filein.open(file_path);
+
+	if (!filein.is_open()) {
+		cout << "ERROR: Could not open";
+	}
+	else {
+		employee person;
+		while (filein.read((char*)&person, sizeof(employee)))
+		{
+			int career_years = sys_date.year - person.start_career.year;
+			if (person.start_career.month < sys_date.month || (person.start_career.month == sys_date.month && person.start_career.day > sys_date.day))
+				career_years -= 1;
+			if (person.birthday.month == sys_date.month && career_years >= 5)
+				person.print();
+		}
+	}
+	filein.close();
+}
+
+date get_system_date()
+{
+	date res;
+	time_t theTime = time(NULL);
+	struct tm* aTime = localtime(&theTime);
+
+	res.day = aTime->tm_mday;
+	res.month = aTime->tm_mon + 1;
+	res.year = aTime->tm_year + 1900;
+
+	return res;
 }
 
 vector<string> split(string str, char separator)
