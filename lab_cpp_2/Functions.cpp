@@ -91,7 +91,7 @@ void input_file(string file_path)
 	else {
 		string line;
 		employee person;
-		cout << "Enter information about the employeers in format [surname dd.mm.yyyy dd.mm.yyyy] (send empty line to finish):\n";
+		cout << "Enter information about the employees in format [surname dd.mm.yyyy dd.mm.yyyy] (send empty line to finish):\n";
 		getline(cin, line);
 		while (!line.empty()) {
 			vector<string> words = split(line, ' ');
