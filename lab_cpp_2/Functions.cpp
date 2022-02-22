@@ -55,8 +55,8 @@ struct employee {
 	date start_career;
 
 	void print() {
-		cout << "Surname: " << surname << '\t';
-		cout << "Birthday: " << birthday.get_format() << '\t';
+		cout << "Surname: " << surname << "\t\t";
+		cout << "Birthday: " << birthday.get_format() << "\t\t";
 		cout << "Start career: " << start_career.get_format() << endl;
 	}
 };
@@ -64,8 +64,26 @@ struct employee {
 
 void input_file(string file_path)
 {
+	cout << "Choose input mode:" << endl << "1) append info in the file" << endl << "2) create new file" << endl;
+	string input_mode;
+	getline(cin, input_mode);
+	
 	ofstream fileout;
-	fileout.open(file_path);
+	while (true) {
+		if (!input_mode.compare("1"))
+		{
+			fileout.open(file_path, ios::app);
+			break;
+		}
+		else if (!input_mode.compare("2"))
+		{
+			fileout.open(file_path);
+			break;
+		}
+		else {
+			cout << "Invalid input mode";
+		}
+	}
 
 	if (!fileout.is_open()) {
 		cout << "ERROR: Could not open";
@@ -77,14 +95,9 @@ void input_file(string file_path)
 		getline(cin, line);
 		while (!line.empty()) {
 			vector<string> words = split(line, ' ');
-			if (words.size() < 3) {
-				cout << "Invalid input" << endl;
-			}
-			else {
-				strcpy_s(person.surname, words[0].c_str());
-				if (person.birthday.save(words[1]) && (person.start_career.save(words[2]))) {
-					fileout.write((char*)&person, sizeof(employee));
-				}
+			strcpy_s(person.surname, words[0].c_str());
+			if (person.birthday.save(words[1]) && (person.start_career.save(words[2]))) {
+				fileout.write((char*)&person, sizeof(employee));
 			}
 			getline(cin, line);
 		}
