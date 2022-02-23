@@ -137,8 +137,8 @@ void birthday_in_this_month(string file_path)
 		date sys_date = get_system_date();
 		while (filein.read((char*)&person, sizeof(employee)))
 		{
-			int work_expirience = get_years_between_dates(person.start_career, sys_date);
-			if (person.birthday.month == sys_date.month && work_expirience >= 5)
+			int work_experience = get_years_between_dates(person.start_career, sys_date);
+			if (person.birthday.month == sys_date.month && work_experience >= 5)
 			{
 				person.print();
 			}
@@ -164,8 +164,8 @@ void create_second_file(string filein_name, string fileout_name)
 		while (filein.read((char*)&person, sizeof(employee)))
 		{
 			int start_career_age = get_years_between_dates(person.birthday, person.start_career);
-			int work_expirience = get_years_between_dates(person.start_career, sys_date);
-			if (start_career_age <= 25 && work_expirience >= 10)
+			int work_experience = get_years_between_dates(person.start_career, sys_date);
+			if (start_career_age <= 25 && work_experience >= 10)
 			{
 				fileout.write((char*)&person, sizeof(employee));
 			}
