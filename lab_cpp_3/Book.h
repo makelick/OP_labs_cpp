@@ -17,7 +17,10 @@ public:
 	Book();
 	Book(string);
 	int getYear();
+	int getNumberOfPages();
 	string getInfo();
 };
 
+Book* createArray(int);
+Book findBooksInRange(Book*, int);
 vector<string> split(string, char);

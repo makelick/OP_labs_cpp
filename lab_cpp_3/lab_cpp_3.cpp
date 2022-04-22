@@ -6,30 +6,13 @@ int main()
     int size;
     cin >> size;
     cin.ignore();
-    Book* array = new Book[size];
-    cout << "Enter information about the books in format [full authors name, title, year, number of pages]:" << endl;
-    for (int i = 0; i < size; i++) {
-        string str;
-        getline(cin, str);
-        array[i] = Book(str);
-    }
 
-    cout << endl << "Enter the range of years in format [minYear-maxYear]: ";
-    string stringRange;
-    cin >> stringRange;
-    vector<string> range = split(stringRange, '-');
-    int minYear = stoi(range[0]);
-    int maxYear = stoi(range[1]);
+    Book* books = createArray(size);
 
-    cout << endl << "Books published in this range: " << endl;
-    for (int i = 0; i < size; i++) {
-        int year = array[i].getYear();
-        if (year > minYear && year < maxYear) {
-            cout << array[i].getInfo() << endl;
-        }
+    Book bookWithMaxPages = findBooksInRange(books, size);
 
-    }
+    cout << endl << "Book with max number of pages in this range: " << endl << bookWithMaxPages.getInfo() << endl;
 
-    delete[] array;
+    delete[] books;
     return 0;
 }
