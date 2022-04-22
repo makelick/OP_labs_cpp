@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -8,10 +9,13 @@ using namespace std;
 class Book {
 private:
 	string author;
-	string name;
+	string title;
 	int year;
 	int numberOfPages;
 
-private:
-
+public:
+	Book();
+	Book(string);
 };
+
+vector<string> split(string, char);
