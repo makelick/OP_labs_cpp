@@ -55,8 +55,8 @@ struct employee {
 	date start_career;
 
 	void print() {
-		cout << "Surname: " << surname << '\t';
-		cout << "Birthday: " << birthday.get_format() << '\t';
+		cout << "Surname: " << surname << "\t\t";
+		cout << "Birthday: " << birthday.get_format() << "\t\t";
 		cout << "Start career: " << start_career.get_format() << endl;
 	}
 };
@@ -64,8 +64,26 @@ struct employee {
 
 void input_file(string file_path)
 {
+	cout << "Choose input mode:" << endl << "1) append info in the file" << endl << "2) create new file" << endl;
+	string input_mode;
+	getline(cin, input_mode);
+	
 	ofstream fileout;
-	fileout.open(file_path);
+	while (true) {
+		if (!input_mode.compare("1"))
+		{
+			fileout.open(file_path, ios::app);
+			break;
+		}
+		else if (!input_mode.compare("2"))
+		{
+			fileout.open(file_path);
+			break;
+		}
+		else {
+			cout << "Invalid input mode";
+		}
+	}
 
 	if (!fileout.is_open()) {
 		cout << "ERROR: Could not open";
@@ -73,18 +91,13 @@ void input_file(string file_path)
 	else {
 		string line;
 		employee person;
-		cout << "Enter information about the employeers in format [surname dd.mm.yyyy dd.mm.yyyy] (send empty line to finish):\n";
+		cout << "Enter information about the employees in format [surname dd.mm.yyyy dd.mm.yyyy] (send empty line to finish):\n";
 		getline(cin, line);
 		while (!line.empty()) {
 			vector<string> words = split(line, ' ');
-			if (words.size() < 3) {
-				cout << "Invalid input" << endl;
-			}
-			else {
-				strcpy_s(person.surname, words[0].c_str());
-				if (person.birthday.save(words[1]) && (person.start_career.save(words[2]))) {
-					fileout.write((char*)&person, sizeof(employee));
-				}
+			strcpy_s(person.surname, words[0].c_str());
+			if (person.birthday.save(words[1]) && (person.start_career.save(words[2]))) {
+				fileout.write((char*)&person, sizeof(employee));
 			}
 			getline(cin, line);
 		}
@@ -124,8 +137,8 @@ void birthday_in_this_month(string file_path)
 		date sys_date = get_system_date();
 		while (filein.read((char*)&person, sizeof(employee)))
 		{
-			int work_expirience = get_years_between_dates(person.start_career, sys_date);
-			if (person.birthday.month == sys_date.month && work_expirience >= 5)
+			int work_experience = get_years_between_dates(person.start_career, sys_date);
+			if (person.birthday.month == sys_date.month && work_experience >= 5)
 			{
 				person.print();
 			}
@@ -151,8 +164,8 @@ void create_second_file(string filein_name, string fileout_name)
 		while (filein.read((char*)&person, sizeof(employee)))
 		{
 			int start_career_age = get_years_between_dates(person.birthday, person.start_career);
-			int work_expirience = get_years_between_dates(person.start_career, sys_date);
-			if (start_career_age <= 25 && work_expirience >= 10)
+			int work_experience = get_years_between_dates(person.start_career, sys_date);
+			if (start_career_age <= 25 && work_experience >= 10)
 			{
 				fileout.write((char*)&person, sizeof(employee));
 			}
