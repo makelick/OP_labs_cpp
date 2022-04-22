@@ -16,6 +16,8 @@ private:
 public:
 	Book();
 	Book(string);
+	int getYear();
+	string getInfo();
 };
 
 vector<string> split(string, char);

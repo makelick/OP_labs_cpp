@@ -1,6 +1,7 @@
 #include "Book.h"
 
 Book::Book() {};
+
 Book::Book(string line) {
 	vector<string> atributes = split(line, ',');
 	author = atributes[0];
@@ -9,8 +10,13 @@ Book::Book(string line) {
 	numberOfPages = stoi(atributes[3]);
 };
 
-vector<string> split(string str, char separator)
-{
+int Book::getYear() { return year; }
+
+string Book::getInfo() {
+	return "Author: " + author + ", title: " + title + ", year: " + to_string(year) + ", number of pages: " + to_string(numberOfPages);
+}
+
+vector<string> split(string str, char separator) {
 	vector<string> res;
 	string slice = "";
 	str += " ";
