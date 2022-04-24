@@ -18,4 +18,9 @@ public:
 	int getRows();
 	int getCols();
 	bool** getMatrix();
+	int countTrue();
+	void printMatrix();
 };
+
+bool** initMatrix(int, int);
+void deleteMatrix(bool**, int);

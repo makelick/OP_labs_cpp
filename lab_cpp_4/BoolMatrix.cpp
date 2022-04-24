@@ -1,29 +1,10 @@
 #include "BoolMatrix.h"
 
-int BoolMatrix::getRows() { return rows; };
-
-int BoolMatrix::getCols() { return cols; };
-
-bool** BoolMatrix::getMatrix() { return matrix; };
-
 BoolMatrix::BoolMatrix(int rws, int cls) {
     rows = rws;
     cols = cls;
-    matrix = new bool* [rows];
-    for (int i = 0; i < rows; i++)
-    {
-        matrix[i] = new bool[cols];
-    }
-
-    srand(time(NULL));
-    for (int i = 0; i < rows; i++)
-    {
-        for (int j = 0; j < cols; j++)
-        {
-            matrix[i][j] = rand() % 2;
-        }
-    }
-};
+    matrix = initMatrix(rws, cls);
+}
 
 BoolMatrix::BoolMatrix(int rws, int cls, bool** matr) {
     rows = rws;
@@ -37,7 +18,7 @@ BoolMatrix::BoolMatrix(int rws, int cls, bool** matr) {
             matrix[i][j] = matr[i][j];
         }
     }
-};
+}
 
 BoolMatrix::BoolMatrix(BoolMatrix& other) {
     rows = other.rows;
@@ -51,12 +32,67 @@ BoolMatrix::BoolMatrix(BoolMatrix& other) {
             matrix[i][j] = other.matrix[i][j];
         }
     }
-};
+}
 
 BoolMatrix::~BoolMatrix() {
+    deleteMatrix(matrix, rows);
+}
+
+int BoolMatrix::getRows() { return rows; }
+
+int BoolMatrix::getCols() { return cols; }
+
+bool** BoolMatrix::getMatrix() { return matrix; }
+
+int BoolMatrix::countTrue() {
+    int res = 0;
+    for (int i = 0; i < rows; i++) 
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            if (matrix[i][j]) 
+            {
+                res++;
+            }
+        }
+    }
+    return res;
+}
+
+void BoolMatrix::printMatrix() {
     for (int i = 0; i < rows; i++)
     {
-        delete[] matrix[i];
+        for (int j = 0; j < cols; j++)
+        {
+            cout << matrix[i][j] << '\t';
+        }
+        cout << endl;
     }
-    delete[] matrix;
-};
+    cout << endl;
+}
+
+bool** initMatrix(int rows, int cols) {
+    bool** matrix = new bool* [rows];
+    for (int i = 0; i < rows; i++)
+    {
+        matrix[i] = new bool[cols];
+    }
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            matrix[i][j] = rand() % 2;
+        }
+    }
+
+    return matrix;
+}
+
+void deleteMatrix(bool** mtr, int rows) {
+    for (int i = 0; i < rows; i++)
+    {
+        delete[] mtr[i];
+    }
+    delete[] mtr;
+}
