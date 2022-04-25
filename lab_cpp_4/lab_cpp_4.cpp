@@ -19,8 +19,16 @@ int main()
     cout << "Second matrix: " << endl;
     matrix2.printMatrix();
 
-    BoolMatrix matrix3(matrix1);
-    
+    BoolMatrix matrix3 = matrix1 | matrix2;
+    cout << "Third matrix (matrix1 | matrix2): " << endl;
+    matrix3.printMatrix();
+
+    matrix3 = ~matrix3;
+    cout << "Third matrix (~matrix3): " << endl;
+    matrix3.printMatrix();
+
+    cout << "Number of 1 in matrix is " << matrix3.countTrue() << endl;
+
     deleteMatrix(mtr, rows);
     return 0;
 }

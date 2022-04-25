@@ -20,6 +20,8 @@ public:
 	bool** getMatrix();
 	int countTrue();
 	void printMatrix();
+	BoolMatrix& operator~();
+	BoolMatrix& operator|(BoolMatrix&);
 };
 
 bool** initMatrix(int, int);

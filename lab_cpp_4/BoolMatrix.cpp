@@ -71,6 +71,29 @@ void BoolMatrix::printMatrix() {
     cout << endl;
 }
 
+BoolMatrix& BoolMatrix::operator~() {
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            matrix[i][j] = !matrix[i][j];
+        }
+    }
+    return *this;
+}
+
+BoolMatrix& BoolMatrix::operator|(BoolMatrix& other) {
+    BoolMatrix& res = *this;
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            res.matrix[i][j] = matrix[i][j] | other.matrix[i][j];
+        }
+    }
+    return res;
+}
+
 bool** initMatrix(int rows, int cols) {
     bool** matrix = new bool* [rows];
     for (int i = 0; i < rows; i++)
