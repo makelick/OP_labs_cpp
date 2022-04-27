@@ -8,10 +8,11 @@ using namespace std;
 class BankAccount {
 private:
 	string bankName;
-	static int idGenerator;
 	int id;
 	bool isAvailable;
 public:
+	BankAccount() {};
+	BankAccount(vector<string>);
 	virtual void addBalance(int) = 0;
 	virtual void subBalance(int) = 0;
 };
@@ -21,6 +22,7 @@ private:
 	Date lastOperationDate;
 	int balance;
 public:
+	CurrentAccount(vector<string>);
 	virtual void addBalance(int sum) { balance += sum; };
 	virtual void subBalance(int sum) { balance -= sum; };
 };
@@ -32,6 +34,7 @@ private:
 	int balance;
 	double rate;
 public:
+	DepositAccount(vector<string>);
 	virtual void addBalance(int sum) { balance += sum; };
 	virtual void subBalance(int sum) { balance -= sum; };
 };
@@ -42,6 +45,8 @@ private:
 	int month;
 	int day;
 public:
+	Date(int year = 1900, int month = 1, int day = 1);
+	Date(string);
 	int getYear() { return year; }
 	int getMonth() { return month; }
 	int getDay() { return day; }
@@ -50,3 +55,6 @@ public:
 	void setDay(int day) { this->day = day; }
 	friend int getMonthsBetweenDates(Date&, Date&);
 };
+
+void initVectors(int, vector<CurrentAccount>&, vector<DepositAccount>&);
+vector<string> split(string, char);
