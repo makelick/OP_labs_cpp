@@ -25,7 +25,7 @@ Date::Date(string str) {
 	year = stoi(temp[2]);
 }
 
-Date::Date(int year = 1900, int month = 1, int day = 1) {
+Date::Date(int year, int month, int day) {
 	this->year = year;
 	this->month = month;
 	this->day = day;
@@ -44,13 +44,23 @@ void initVectors(int size, vector<CurrentAccount>& currents, vector<DepositAccou
 	for (int i = 0; i < size; i++)
 	{
 		string str;
+		vector<string> attributes;
 		getline(cin, str);
-		vector<string> attributes = split(str, ',');
+		attributes = split(str, ',');
 		currents.push_back(CurrentAccount(attributes));
 		getline(cin, str);
-		vector<string> attributes = split(str, ',');
+		attributes = split(str, ',');
 		deposits.push_back(DepositAccount(attributes));
 	}
+}
+
+Date getSystemDate()
+{
+	struct tm currentTime;
+	time_t t = time(NULL);
+	localtime_s(&currentTime, &t);
+
+	return 	Date(currentTime.tm_mday, currentTime.tm_mon + 1, currentTime.tm_year + 1900);
 }
 
 vector<string> split(string str, char separator) {

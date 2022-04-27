@@ -5,6 +5,23 @@
 
 using namespace std;
 
+class Date {
+private:
+	int year;
+	int month;
+	int day;
+public:
+	Date(int day = 1, int month = 1, int year = 1900);
+	Date(string);
+	int getYear() { return year; }
+	int getMonth() { return month; }
+	int getDay() { return day; }
+	void setYear(int year) { this->year = year; }
+	void setMonth(int month) { this->month = month; }
+	void setDay(int day) { this->day = day; }
+	friend int getMonthsBetweenDates(Date&, Date&);
+};
+
 class BankAccount {
 private:
 	string bankName;
@@ -39,22 +56,6 @@ public:
 	virtual void subBalance(int sum) { balance -= sum; };
 };
 
-class Date {
-private:
-	int year;
-	int month;
-	int day;
-public:
-	Date(int year = 1900, int month = 1, int day = 1);
-	Date(string);
-	int getYear() { return year; }
-	int getMonth() { return month; }
-	int getDay() { return day; }
-	void setYear(int year) { this->year = year; }
-	void setMonth(int month) { this->month = month; }
-	void setDay(int day) { this->day = day; }
-	friend int getMonthsBetweenDates(Date&, Date&);
-};
-
 void initVectors(int, vector<CurrentAccount>&, vector<DepositAccount>&);
+Date getSystemDate();
 vector<string> split(string, char);
