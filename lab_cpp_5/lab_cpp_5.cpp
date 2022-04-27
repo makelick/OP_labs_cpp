@@ -10,7 +10,8 @@ int main()
     vector<CurrentAccount> currents;
     vector<DepositAccount> deposits;
     initVectors(n, currents, deposits);
-
+    checkDeposits(n, currents, deposits);
+    printAccounts(n, currents, deposits);
 
     return 0;
 }
