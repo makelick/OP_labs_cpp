@@ -63,6 +63,7 @@ void initVectors(int size, vector<CurrentAccount>& currents, vector<DepositAccou
 		getline(cin, str);
 		attributes = split(str, ',');
 		deposits.push_back(DepositAccount(attributes));
+		cout << endl;
 	}
 }
 
@@ -72,11 +73,11 @@ void checkDeposits(int size, vector<CurrentAccount>& currents, vector<DepositAcc
 	{
 		Date openDate = deposits[i].getOpeningDate();
 		int completedMonth = getMonthsBetweenDates(now, openDate);
-		int percents;
+		double percents;
 
 		if (completedMonth >= deposits[i].getPeriod())
 		{
-			percents = deposits[i].getPeriod() * (int)(deposits[i].getBalance() * deposits[i].getRate());
+			percents = deposits[i].getPeriod() * (deposits[i].getBalance() * deposits[i].getRate());
 			currents[i].addBalance(deposits[i].getBalance());
 			deposits[i].subBalance(deposits[i].getBalance());
 			deposits[i].setIsAvailable(false);
@@ -84,7 +85,7 @@ void checkDeposits(int size, vector<CurrentAccount>& currents, vector<DepositAcc
 		}
 		else 
 		{
-			percents = completedMonth * (int)(deposits[i].getBalance() * deposits[i].getRate());
+			percents = completedMonth * (deposits[i].getBalance() * deposits[i].getRate());
 			openDate.setMonth(openDate.getMonth() + completedMonth);
 		}
 		while (openDate.getMonth() > 12)
@@ -109,14 +110,14 @@ void printAccounts(int size, vector<CurrentAccount>& currents, vector<DepositAcc
 		cout << "Pair " << i + 1 << ": " << endl;
 
 		cout << "id:" << c.getId() 
-			<< ", bank name: " << c.getBankName() 
-			<< ", date of last operation: " << lastOp.getString() 
-			<< ", balance: " << c.getBalance() << endl;
+			<< "\tbank name: " << c.getBankName() 
+			<< "\tdate of last operation: " << lastOp.getString() 
+			<< "\tbalance: " << c.getBalance() << endl;
 
-		cout << "status: " << status 
-			<< ", id:" << d.getId()
-			<< ", bank name: " << d.getBankName()
-			<< ", balance: " << d.getBalance() << endl;
+		cout << "id:" << d.getId()
+			<< "\tbank name: " << d.getBankName()
+			<< "\tstatus: " << status
+			<< "\tbalance: " << d.getBalance() << endl << endl;
 	}
 }
 
