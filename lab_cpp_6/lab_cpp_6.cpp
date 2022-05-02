@@ -14,5 +14,6 @@ int main()
         addElement(root, element);
     }
     
+    printTree(root, 0);
     return 0;
 }

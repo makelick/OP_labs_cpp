@@ -10,3 +10,4 @@ struct Branch {
 };
 
 void addElement(Branch*&, double);
+void printTree(Branch*, int);
