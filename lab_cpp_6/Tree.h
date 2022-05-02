@@ -3,4 +3,10 @@
 
 using namespace std;
 
+struct Branch {
+	double data;
+	Branch* leftBranch;
+	Branch* rightBranch;
+};
 
+void addElement(Branch*&, double);
