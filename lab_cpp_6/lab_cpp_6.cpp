@@ -13,7 +13,10 @@ int main()
         cin >> element;
         addElement(root, element);
     }
+    printTree(root, 0);
     
+    swapMaxAndMin(root);
+    cout << "Tree with swaped elements: " << endl;
     printTree(root, 0);
     return 0;
 }

@@ -11,3 +11,8 @@ struct Branch {
 
 void addElement(Branch*&, double);
 void printTree(Branch*, int);
+void swapMaxAndMin(Branch*&);
+double getMax(Branch*);
+double getMin(Branch*);
+void setOnMaxPos(Branch*&, double);
+void setOnMinPos(Branch*&, double);
