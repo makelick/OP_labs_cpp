@@ -2,7 +2,7 @@
 
 int main()
 {
-    Branch* root = NULL;
+    Tree tree;
     int size;
     double element;
     cout << "Enter the number of elements in tree: ";
@@ -11,12 +11,12 @@ int main()
     for (int i = 0; i < size; i++)
     {
         cin >> element;
-        addElement(root, element);
+        tree.addElement(tree.getRoot(), element);
     }
-    printTree(root, 0);
+    tree.printTree(tree.getRoot(), 0);
     
-    swapMaxAndMin(root);
+    tree.swapMaxAndMin(tree.getRoot());
     cout << "Tree with swaped elements: " << endl;
-    printTree(root, 0);
+    tree.printTree(tree.getRoot(), 0);
     return 0;
 }

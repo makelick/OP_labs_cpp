@@ -1,6 +1,10 @@
 #include "Tree.h"
 
-void addElement(Branch*& branch, double element) {
+Tree::Tree() {
+	root = NULL;
+}
+
+void Tree::addElement(Branch*& branch, double element) {
 	if (!branch) {
 		branch = new Branch;
 		branch->leftBranch = NULL;
@@ -17,7 +21,7 @@ void addElement(Branch*& branch, double element) {
 	}
 }
 
-void printTree(Branch* branch, int tabs) {
+void Tree::printTree(Branch* branch, int tabs) {
 	if (!branch) {
 		return;
 	}
@@ -28,10 +32,10 @@ void printTree(Branch* branch, int tabs) {
 	}
 	cout << branch->data << endl;
 
-	printTree(branch->leftBranch, tabs);
+	this->printTree(branch->leftBranch, tabs);
 }
 
-void swapMaxAndMin(Branch*& branch) {
+void Tree::swapMaxAndMin(Branch*& branch) {
 	if (!branch) {
 		return;
 	}
@@ -42,7 +46,7 @@ void swapMaxAndMin(Branch*& branch) {
 	
 }
 
-double getMin(Branch* branch) {
+double Tree::getMin(Branch* branch) {
 	if (branch->leftBranch != NULL) {
 		return getMin(branch->leftBranch);
 	}
@@ -51,7 +55,7 @@ double getMin(Branch* branch) {
 	}
 }
 
-double getMax(Branch* branch) {
+double Tree::getMax(Branch* branch) {
 	if (branch->rightBranch != NULL) {
 		return getMax(branch->rightBranch);
 	}
@@ -60,7 +64,7 @@ double getMax(Branch* branch) {
 	}
 }
 
-void setOnMaxPos(Branch*& branch, double val) {
+void Tree::setOnMaxPos(Branch*& branch, double val) {
 	if (branch->rightBranch != NULL) {
 		setOnMaxPos(branch->rightBranch, val);
 	}
@@ -70,7 +74,7 @@ void setOnMaxPos(Branch*& branch, double val) {
 	}
 }
 
-void setOnMinPos(Branch*& branch, double val) {
+void Tree::setOnMinPos(Branch*& branch, double val) {
 	if (branch->leftBranch != NULL) {
 		setOnMinPos(branch->leftBranch, val);
 	}
