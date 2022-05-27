@@ -11,12 +11,12 @@ int main()
     for (int i = 0; i < size; i++)
     {
         cin >> element;
-        tree.addElement(tree.getRoot(), element);
+        tree.addElement(element);
     }
-    tree.printTree(tree.getRoot(), 0);
+    tree.printTree();
     
-    tree.swapMaxAndMin(tree.getRoot());
+    tree.swapMaxAndMin();
     cout << "Tree with swaped elements: " << endl;
-    tree.printTree(tree.getRoot(), 0);
+    tree.printTree();
     return 0;
 }

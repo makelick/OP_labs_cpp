@@ -14,14 +14,15 @@ class Tree {
 private:
 	Branch* root;
 
+	void addElementRecursion(Branch*&, double);
+	void printTreeRecursion(Branch*, int);
 	double getMax(Branch*);
 	double getMin(Branch*);
 	void setOnMaxPos(Branch*&, double);
 	void setOnMinPos(Branch*&, double);
 public:
 	Tree();
-	Branch*& getRoot() { return root; }
-	void addElement(Branch*& , double);
-	void printTree(Branch*, int);
-	void swapMaxAndMin(Branch*&);
+	void addElement(double);
+	void printTree();
+	void swapMaxAndMin();
 };

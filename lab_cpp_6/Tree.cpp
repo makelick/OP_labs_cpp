@@ -4,7 +4,11 @@ Tree::Tree() {
 	root = NULL;
 }
 
-void Tree::addElement(Branch*& branch, double element) {
+void Tree::addElement(double element) {
+	this->addElementRecursion(root, element);
+}
+
+void Tree::addElementRecursion(Branch*& branch, double element) {
 	if (!branch) {
 		branch = new Branch;
 		branch->leftBranch = NULL;
@@ -14,35 +18,39 @@ void Tree::addElement(Branch*& branch, double element) {
 	}
 
 	if (element >= branch->data) {
-		addElement(branch->rightBranch, element);
+		addElementRecursion(branch->rightBranch, element);
 	}
 	else {
-		addElement(branch->leftBranch, element);
+		addElementRecursion(branch->leftBranch, element);
 	}
 }
 
-void Tree::printTree(Branch* branch, int tabs) {
+void Tree::printTree() {
+	this->printTreeRecursion(root, 0);
+}
+
+void Tree::printTreeRecursion(Branch* branch, int tabs) {
 	if (!branch) {
 		return;
 	}
-	printTree(branch->rightBranch, ++tabs);
+	printTreeRecursion(branch->rightBranch, ++tabs);
 
 	for (int i = 1; i < tabs; i++) {
 		cout << "\t";
 	}
 	cout << branch->data << endl;
 
-	this->printTree(branch->leftBranch, tabs);
+	this->printTreeRecursion(branch->leftBranch, tabs);
 }
 
-void Tree::swapMaxAndMin(Branch*& branch) {
-	if (!branch) {
+void Tree::swapMaxAndMin() {
+	if (!root) {
 		return;
 	}
-	double max = getMax(branch);
-	double min = getMin(branch);
-	setOnMaxPos(branch, min);
-	setOnMinPos(branch, max);
+	double max = getMax(root);
+	double min = getMin(root);
+	setOnMaxPos(root, min);
+	setOnMinPos(root, max);
 	
 }
 
